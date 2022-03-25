@@ -1,0 +1,12 @@
+.mat-drawer-container {
+  position: unset;
+}
+.mat-drawer-content {
+  position: absolute;
+  width: -webkit-fill-available;
+}
+
+.mainContainer {
+  margin: auto;
+  width: 96% !important;
+}

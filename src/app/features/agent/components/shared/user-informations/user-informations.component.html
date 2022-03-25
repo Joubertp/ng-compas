@@ -1,0 +1,30 @@
+<mat-card>
+    <mat-card-title>Informations</mat-card-title>
+    <mat-card-content>
+        <table>
+            <tr>Numen: {{userInfos.numen}}</tr>
+            <tr>Academie: {{userInfos.academie}}</tr>
+            <tr>Corps: {{userInfos.corps}}</tr>
+            <tr>Mode d'accées au concour: {{userInfos.modeAcceesConcour}}</tr>
+            <tr>Discipline: {{userInfos.discipline}}</tr>
+            <tr>Date d'entré dans le grade: {{userInfos.dateEntreGrade}}</tr>
+            <tr>Date de titularisation: {{userInfos.dateTitularisation}}</tr>
+            <tr>Position gestion: {{userInfos.positionGestion}}</tr>
+            <tr>Num patronymique: {{userInfos.nomPatronymique}}</tr>
+        </table>
+        <table>
+            <th>Contact</th>
+            <tr>{{userInfos.email}}</tr>
+            <tr>{{userInfos.phoneFix}}</tr>
+            <tr>{{userInfos.phonePortable}}</tr>
+        </table>
+        <table>
+            <th>Adresse</th>
+            <tr>{{userInfos.adresse}}</tr>
+            <tr>{{userInfos.codePostale}} {{userInfos.ville}}</tr>
+        </table>
+
+
+
+    </mat-card-content>
+</mat-card>

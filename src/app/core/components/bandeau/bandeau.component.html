@@ -1,0 +1,71 @@
+<mat-toolbar>
+  <span class="img-texte"><img src="assets\images\small-logo.svg" />
+  </span>
+
+  <app-auto-open-menu>
+    <button mat-button trigger routerLink="/gestion/accueilGestion">Gestion
+      <span class="material-icons-outlined"> arrow_drop_down </span></button>
+    <div content>
+      <span mat-menu-item><button mat-menu-item routerLink="/agent/suivi/stagiaire">Stagiaires
+        </button></span>
+      <span mat-menu-item><button mat-menu-item>Importer des stagiaires</button></span>
+      <span mat-menu-item><button mat-menu-item>Viviers</button></span>
+      <span mat-menu-item><button mat-menu-item>Tableau de bord des dépôts</button></span>
+      <span mat-menu-item><button mat-menu-item>Berceaux</button></span>
+      <span mat-menu-item><button mat-menu-item>Absences Organisme Formation</button></span>
+      <span mat-menu-item><button mat-menu-item>Absences EPLE</button></span>
+    </div>
+  </app-auto-open-menu>
+
+  <app-auto-open-menu>
+    <button mat-button trigger>Administration
+      <span class="material-icons-outlined"> arrow_drop_down </span> </button>
+    <div content>
+      <span mat-menu-item><button mat-menu-item>Académies</button></span>
+      <span mat-menu-item><button mat-menu-item>Accès au diplôme M2</button></span>
+      <span mat-menu-item><button mat-menu-item>Diplômes</button></span>
+      <span mat-menu-item><button mat-menu-item>Cartes de formation</button></span>
+      <span mat-menu-item><button mat-menu-item>Classe d'affectation</button></span>
+      <span mat-menu-item><button mat-menu-item>Types de parcours</button></span>
+      <span mat-menu-item><button mat-menu-item>Mentions et parcours</button></span>
+      <span mat-menu-item><button mat-menu-item>Grilles de compétences</button></span>
+      <span mat-menu-item><button mat-menu-item routerLink="/agent/agents/list">Agents</button></span>
+      <span mat-menu-item><button mat-menu-item>Etablissements</button></span>
+      <span mat-menu-item><button mat-menu-item>Utilisateurs connectés</button></span>
+      <span mat-menu-item><button mat-menu-item>Portail</button></span>
+    </div>
+  </app-auto-open-menu>
+
+  <app-auto-open-menu>
+    <button mat-button trigger>Aide
+      <span class="material-icons-outlined"> arrow_drop_down </span> </button>
+    <div content>
+      <span><button mat-menu-item>Notice en ligne</button></span>
+      <span><button mat-menu-item>Espace Documentaire</button></span>
+      <span><button mat-menu-item>Notice au format PDF</button></span>
+      <span><button mat-menu-item>Assistance</button></span>
+      <span><button mat-menu-item>Dépannage</button></span>
+    </div>
+  </app-auto-open-menu>
+
+  <span class="spacer"></span>
+  <!-- <div>
+    <mat-divider vertical="true"></mat-divider>
+    <mat-list>
+      <mat-list-item>
+        <div mat-line>
+          <h3>
+            {{ user?.prenom }} <strong>{{ user?.nomUsage }}</strong>
+          </h3>
+        </div>
+        <div mat-line class="info">
+          <span *ngIf="user?.role.gestion">{{ messageIhm.roleGestion }}</span>
+          <span *ngIf="user?.role.consultation">{{ messageIhm.roleConsult }}</span>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div> -->
+  <button mat-icon-button aria-label="Déconnexion" (click)="deconnexion()">
+    <mat-icon color="primary" matTooltip="Déconnexion">exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>

@@ -1,0 +1,9 @@
+<mat-drawer-container autosize>
+  <mat-drawer-content>
+    <app-bandeau (sidenavToggle)="isExpanded = !isExpanded"></app-bandeau>
+    <div class="mainContainer">
+      <router-outlet ></router-outlet>
+
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

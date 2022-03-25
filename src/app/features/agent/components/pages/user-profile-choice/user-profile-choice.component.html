@@ -1,0 +1,15 @@
+<mat-card>
+    <mat-card-title class="text-center">
+        Choix du profil
+    </mat-card-title>
+
+    <mat-card-content>
+        Vous possédez plusieurs profils. Sélectionner le profil souhaité en cliquant sur la description. Si vous souhaitez chager de profil ultérieurement, utilisez la barre de menu.
+        <mat-card *ngFor="let profile of listProfiles" class="button-user-profile-choice-component text-center">
+            <mat-card-title class="title-card-button">{{profile.name}}</mat-card-title>
+            <mat-card-content>{{profile.desc}}</mat-card-content>
+
+        </mat-card>
+    </mat-card-content>
+
+</mat-card>

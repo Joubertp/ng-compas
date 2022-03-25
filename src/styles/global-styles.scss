@@ -1,0 +1,60 @@
+@import url('../../src/assets/fonts/Marianne/marianne.css');
+
+/* You can add global styles to this file, and also import other style files
+
+:root {
+  --main-color: #1287a8;
+  --bandeau-main-color: #094556;
+}
+*/
+
+.customContainer {
+  margin: auto;
+  width: 96% !important;
+  max-width: 1200px;
+}
+.mat-row {
+  border-bottom-width: 0px;
+}
+
+.mat-form-field {
+  margin: 0 4px 1%;
+}
+
+input:-internal-autofill-selected {
+  background-color: unset !important;
+}
+
+.action-row button {
+  margin-right: 2%;
+}
+
+.customDivid {
+  width: 60% !important;
+  margin: auto !important;
+  position: unset !important;
+  border-top-color: #f2f2f2;
+  border-top-width: 2px !important;
+  border-top-style: solid;
+}
+
+.align-center-horiz {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-center {
+  margin: auto !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+mat-card-title {
+  margin-bottom: 2%;
+}
+
+mat-icon {
+  @extend .align-center;
+}

@@ -1,0 +1,29 @@
+<h1 class="text-center">{{user.nom}} {{user.prenom}}</h1>
+
+            <app-user-rythme-stage class="user-profile-card"></app-user-rythme-stage>
+            
+
+
+<mat-grid-list cols="4" rowHeight="1:2">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <div  class="user-profile-card">
+            <app-user-informations ></app-user-informations>
+            <app-user-rythme-stage ></app-user-rythme-stage>
+            <app-user-affectations ></app-user-affectations>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <div  class="user-profile-card">
+            <app-user-jury ></app-user-jury>
+            <app-user-space ></app-user-space>
+            <app-user-documents-consultables ></app-user-documents-consultables>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <div  class="user-profile-card">
+            <app-user-training-organization ></app-user-training-organization>
+            <app-user-links ></app-user-links>
+            <app-user-visistes ></app-user-visistes>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

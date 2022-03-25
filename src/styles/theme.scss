@@ -1,0 +1,290 @@
+@import '~@angular/material/theming';
+
+/* ======== Angular material custom themes ======== */
+$cm-blue: (
+  //Disabled
+  300: #7f7fc8,
+  //Pressed
+  400: #0000ad,
+  //Primary
+  500: #000091,
+  //Secondary - Title
+  600: #484d7a,
+  contrast: (
+    500: #ffffff,
+  )
+);
+
+$cm-red: (
+  //Secondary - Light //#ff6f4c
+  300: #fff6f7,
+  //Secondary - Strong
+  400: #cb000f,
+  //Primary // 500: #e1000f,
+  500: #fb6265,
+  contrast: (
+    500: #ffffff,
+  )
+);
+
+$cm-grey: (
+  //Background
+  100: #f6f6f8,
+  //Disabled
+  200: #f5f6f8,
+  //Default
+  300: #ecedf1,
+  //Pressed
+  400: #bfc1d1,
+  //Primary
+  500: #ffffff,
+  //Text info
+  600: #8c8c8c,
+  // Text default
+  700: #1a1a1a,
+  contrast: (
+    500: #ffffff,
+  )
+);
+
+$cm-green: (
+  //Success
+  500: #158552,
+  contrast: (
+    500: #ffffff,
+  )
+);
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Marianne',
+);
+@include mat-core($custom-typography);
+
+$custom-primary: mat-palette($cm-blue, 500);
+$custom-accent: mat-palette($mat-green, 500);
+$custom-warn: mat-palette($cm-red, 500);
+$custom-theme: mat-light-theme($custom-primary, $custom-accent, $custom-warn);
+@include angular-material-theme($custom-theme);
+
+html {
+  height: 100%;
+}
+body,
+mat-drawer-content {
+  margin: 0;
+  min-height: 100%;
+  background-color: mat-color($cm-grey, 100);
+}
+
+p {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: normal;
+  letter-spacing: 0;
+  color: mat-color($cm-grey, 700);
+}
+
+h1,
+.mat-h1,
+.mat-headline,
+.mat-typography h1 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: bold;
+  letter-spacing: 0;
+  color: mat-color($cm-blue, 600);
+}
+
+h2,
+.mat-h2,
+.mat-card-title {
+  background-color: mat-color($cm-grey, 300);
+  font-size: 21px;
+  line-height: 26px;
+  font-weight: normal;
+  letter-spacing: 0;
+  padding: 5px;
+  color: mat-color($cm-blue, 600);
+}
+.mat-card {
+  padding: 0 !important;
+}
+
+.mat-card-content {
+  padding: 10px !important;
+}
+
+
+h3,
+.mat-h3,
+.mat-subheading-2,
+.mat-typography h3 {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: normal;
+  letter-spacing: 0;
+  color: mat-color($cm-blue, 600);
+  margin: 0 0 0;
+}
+
+label,
+mat-hint,
+mat-error,
+.info {
+  font-size: 12px !important;
+  line-height: 15px;
+  font-weight: bold;
+  letter-spacing: 0;
+  color: mat-color($cm-grey, 600);
+}
+
+// --------------- General button
+.mat-flat-button {
+  font-weight: bold;
+}
+// --------------- Secondary button
+.mat-flat-button.mat-secondary {
+  background-color: mat-color($cm-grey, 300);
+  color: mat-color($cm-blue, 500);
+  font-weight: bold;
+}
+
+.mat-flat-button.mat-secondary:hover {
+  background-color: mat-color($cm-grey, 300);
+  color: mat-color($cm-blue, 500);
+  border: 1px solid currentColor;
+}
+
+.mat-flat-button.mat-secondary:active:not(:disabled) {
+  background-color: mat-color($cm-grey, 400);
+  color: mat-color($cm-blue, 500);
+  font-weight: bold;
+  border: 1px solid currentColor;
+}
+
+.mat-flat-button.mat-secondary:disabled {
+  background-color: mat-color($cm-grey, 200);
+  color: mat-color($cm-grey, 600);
+  font-weight: bold;
+}
+
+// --------------- Primary button
+.mat-flat-button.mat-primary:disabled {
+  background-color: mat-color($cm-blue, 300);
+  color: mat-color($cm-grey, 500);
+}
+
+.mat-flat-button.mat-primary:active:not(:disabled) {
+  background-color: mat-color($cm-blue, 400);
+  color: mat-color($cm-grey, 500);
+}
+// ---------------
+
+mat-card {
+  box-shadow: none !important;
+}
+
+/*Diminue la taille des champs*/
+.mat-form-field {
+  font-size: 10px;
+}
+/*Augment la taille des valeur en input*/
+input {
+  font-size: 14px !important;
+}
+
+mat-drawer mat-nav-list a h3,
+a {
+  color: mat-color($cm-grey, 600);
+}
+
+mat-drawer mat-nav-list .is-active,
+mat-drawer mat-nav-list .is-active h3 {
+  color: mat-color($cm-blue, 500) !important;
+  font-weight: bold;
+}
+
+button:focus {
+  outline: unset;
+}
+
+/**
+Force les icons en outline
+*/
+mat-icon {
+  @extend .material-icons-outlined;
+}
+
+.material-icons-outlined {
+  font-family: 'Material Icons Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+.snackbar-alert {
+  background: mat-color($cm-red, 500);
+  color: mat-color($cm-grey, 500);
+  display: flex;
+}
+
+.snackbar-info {
+  background: mat-color($cm-blue, 500);
+  color: mat-color($cm-grey, 500);
+}
+
+.snackbar-warning {
+  background: mat-color($cm-red, 400);
+  color: mat-color($cm-grey, 500);
+}
+
+.snackbar-success {
+  background: mat-color($cm-green, 500);
+  color: mat-color($cm-grey, 500);
+}
+
+// ------- Custom table -------
+
+.mat-header-row {
+  background-color: mat-color($cm-red, 500);
+  border-radius: 4px 4px 0 0;
+  min-height: 30px;
+}
+.mat-header-cell {
+  color: white;
+  font-weight: bold;
+}
+
+.mat-cell:last-of-type,
+.mat-header-cell:last-of-type {
+  padding-right: 0px;
+}
+.mat-cell:first-of-type,
+.mat-header-cell:first-of-type {
+  padding-left: 12px;
+}
+
+.mat-row {
+  min-height: 40px;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: mat-color($cm-red, 300);
+}
+.mat-toolbar {
+  border-bottom: solid 2px #f2f2f2;
+}
+.mat-drawer-side {
+  border-right: solid 2px #f2f2f2;
+}
+.mat-sort-header-arrow {
+  color: #fff;
+}

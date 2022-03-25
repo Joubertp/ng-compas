@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Marianne';
+  font-style: normal;
+  font-weight: bold;
+  src: url(Marianne-Bold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Marianne';
+  font-style: normal;
+  font-weight: 800;
+  src: url(Marianne-ExtraBold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Marianne';
+  font-style: italic;
+  font-weight: normal;
+  src: url(Marianne-Regular_Italic.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Marianne';
+  font-style: normal;
+  font-weight: normal;
+  src: url(Marianne-Regular.woff2) format('woff2');
+}

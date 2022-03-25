@@ -1,0 +1,88 @@
+<mat-card>
+  <mat-card-title id="editAgent">
+    {{ messageIhm.rechercheAgent }}
+  </mat-card-title>
+  <form [formGroup]="agentsForm" (ngSubmit)="rechercherAgents()">
+    <div class="row">
+      <div class="column left" id="inputForm">
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>{{ messageIhm.nom }}</mat-label>
+            <input matInput type="text" name="nom" id="nom" formControlName="nom" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>{{ messageIhm.prenom }}</mat-label>
+            <input matInput type="text" name="prenom" id="prenom" formControlName="prenom" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>{{ messageIhm.numen }}</mat-label>
+            <input
+              matInput
+              type="text"
+              name="numen"
+              id="numen"
+              formControlName="numen"
+              oninput="this.value = this.value.toUpperCase()"
+              maxlength="13"
+            />
+          </mat-form-field>
+          <button
+            id="expand"
+            type="button"
+            mat-icon-button
+            color="secondary"
+            (click)="isExpanded = !isExpanded"
+          >
+            <mat-icon
+              matTooltip="{{
+                isExpanded ? messageIhm.btnMoinsCriteres : messageIhm.btnPlusCriteres
+              }}"
+              >{{ isExpanded ? 'expand_less' : 'expand_more' }}</mat-icon
+            >
+          </button>
+        </p>
+
+        <p [hidden]="!isExpanded">
+          <mat-form-field appearance="fill">
+            <mat-label>{{ messageIhm.codeEtablissement }}</mat-label>
+            <input
+              matInput
+              type="text"
+              name="codeEtablissement"
+              id="codeEtablissement"
+              formControlName="codeEtablissement"
+              oninput="this.value = this.value.toUpperCase()"
+              maxlength="8"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>{{ messageIhm.codeCorps }}</mat-label>
+            <input
+              matInput
+              type="text"
+              name="codeCorps"
+              id="codeCorps"
+              formControlName="codeCorps"
+              oninput="this.value = this.value.toUpperCase()"
+            />
+          </mat-form-field>
+        </p>
+      </div>
+
+      <div class="column right">
+        <div class="text-center">
+          <button mat-flat-button type="submit" color="primary" id="recherche">
+            <mat-icon>search</mat-icon>
+            {{ messageIhm.btnRecherche }}
+          </button>
+          <a button (click)="initForm()" href="javascript:void(0)">
+            <mat-icon>autorenew</mat-icon>
+            {{ messageIhm.btnReinitialiser }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-card>
+
+<app-liste-agents *ngIf="rechercheLancee" [critereRecherche]="critere"></app-liste-agents>

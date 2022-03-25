@@ -1,0 +1,12 @@
+<div class="dialog-popup">
+  <mat-icon>{{ data.icon }}</mat-icon>
+  <p>
+    <b>{{ data.title }}</b>
+  </p>
+  <p>{{ data.message }}</p>
+  <mat-divider></mat-divider>
+  <div class="mat-form-field">
+    <button mat-flat-button color="" (click)="onNoClick()">{{ data.messageNon }}</button>
+    <button mat-flat-button color="primary" (click)="onYesClick()">{{ data.messageOk }}</button>
+  </div>
+</div>

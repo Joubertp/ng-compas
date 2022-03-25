@@ -1,0 +1,79 @@
+<div *ngIf="agent && agent.agent">
+
+    <h1>{{agent.agent.prenom}} {{agent.agent.nom}}</h1>
+
+
+
+    <mat-grid-list cols="3" rowHeight="1:2">
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <div class="user-profile-card">
+                <mat-card>
+                    <mat-card-title>Informations</mat-card-title>
+                    <mat-card-content>
+                        <table>
+                            <tr>Les données de l'agent sont synchonisées avec le système agape_082</tr>
+
+                            <tr>Grade: {{agent.agent.grade.libelle}}</tr>
+                            <tr>Nom patronymique: {{agent.agent.nom}}</tr>
+                            <tr>Statut: actif <mat-icon>check</mat-icon></tr>
+
+                        </table>
+
+                    </mat-card-content>
+                </mat-card>
+                <mat-card>
+                    <mat-card-title>Contact</mat-card-title>
+                    <mat-card-content>
+                        <table>
+                            <tr><mat-icon> email</mat-icon>{{agent.agent.courriel}}</tr>
+                            <tr><mat-icon> phone</mat-icon>{{agent.agent.telephonePrincipal}}</tr>
+                            <tr><mat-icon> phone</mat-icon>{{agent.agent.telephoneSecondaire}}</tr>
+                        </table>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card>
+                    <mat-card-title>Connexion</mat-card-title>
+                    <mat-card-content>
+                        <table>
+                            <tr>Derniere Connexion {{agent.agent.dateConnexion}}</tr>
+                            <tr>Nombre de connexions: Non connu {{agent.agent.nombreConnexion}}</tr>
+                        </table>
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card>
+                    <mat-card-title>Affectation</mat-card-title>
+                    <mat-card-content>
+                        <table>
+                            <tr>Etablissement d'affectation principal: {{agent.agent.etablissement.id}} - {{agent.agent.etablissement.libelle}} - {{agent.agent.etablissement.libelleComplementaire}}</tr>
+                        </table>
+                    </mat-card-content>
+                </mat-card>
+
+
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <div class="user-profile-card">
+                <mat-card>
+                    <mat-card-title>
+                        {{agent.agent.profil.libelle}} - {{agent.agent.profil.academie.libelle}}
+
+                    </mat-card-title>
+
+                    <mat-card-content>
+                        <tr>{{agent.agent.profil.description}}</tr>
+
+                        <tr>Discipline(s):</tr>
+                        <tr>{{agent.agent.discipline.libelle}} {{agent.agent.discipline.id}}</tr>
+                        <tr>L'affectation est synchronisé avec le systéme {{agent.agent.source}}</tr>
+
+                    </mat-card-content>
+
+
+                </mat-card>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+</div>

@@ -1,0 +1,31 @@
+<div class="accueil-comp">
+  <h1>Acceuil</h1>
+  <mat-card class="comp-top-card-acceuil">
+    <mat-card-title class="text-center">
+      Bienvenue
+    </mat-card-title>
+    <mat-card-content >
+      <p>
+        L'application Musee permet le suivi des fonctionnaires stagiaires en EPLE
+        <br />
+        Afin de pouvoir assurer votre suivi tout au long de l'année vous devez compléter votre dossier administratif.
+      </p>
+
+    </mat-card-content>
+  </mat-card>
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <!-- <mat-grid-tile [colspan]="2" [rowspan]="1"> -->
+    <!-- </mat-grid-tile> -->
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <div class="comp-grid-acceuil">
+        <app-user-dossier-administratif class="comp-grid-acceuil"></app-user-dossier-administratif>
+        <app-user-affectations class="comp-grid-acceuil"></app-user-affectations>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <app-user-documents-consultables class="comp-grid-acceuil"></app-user-documents-consultables>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+</div>

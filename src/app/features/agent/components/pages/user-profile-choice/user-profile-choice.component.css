@@ -1,0 +1,16 @@
+.button-user-profile-choice-component {
+ width: 40%;
+ margin: auto;
+}
+
+.button-user-profile-choice-component:hover {
+    background-color: lightcoral;
+}
+
+.button-user-profile-choice-component:hover {
+    background-color: lightcoral;
+}
+
+.button-user-profile-choice-component:hover mat-card-title{
+    background-color: red;
+}

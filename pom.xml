@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fr.gouv.education.sirh</groupId>
+    <artifactId>appli-blanche-front</artifactId>
+    <version>23.200.0.3-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>appli-blanche-frontend</name>
+    <description>Application appli-blanche frontend</description>
+
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>internal-releases</id>
+            <name>Internal releases repository</name>
+            <url>https://repository-maven.forge.education.gouv.fr/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>internal-snapshots</id>
+            <name>Internal snapshots repository</name>
+            <url>https://repository-maven.forge.education.gouv.fr/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <scm>
+        <connection>scm:git:git@gitlabssh.forge.education.gouv.fr:appli-blanche/appli-blanche-frontend.git</connection>
+        <developerConnection>scm:git:git@gitlabssh.forge.education.gouv.fr:appli-blanche/appli-blanche-frontend.git</developerConnection>
+        <url>scm:git:https://gitlab.forge.education.gouv.fr/appli-blanche/appli-blanche-frontend.git</url>
+      <tag>HEAD</tag>
+  </scm>
+
+    <properties>
+        <sonar.projectKey>appli-blanche-quality-appli-blanche-frontend-develop</sonar.projectKey>
+        <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version>
+        <sonar.ts.tslint.configPath>tslint.json</sonar.ts.tslint.configPath>
+        <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+        <frontend-maven-plugin.version>1.6</frontend-maven-plugin.version>
+        <nodeVersion.version>v10.15.3</nodeVersion.version>
+        <npmVersion.version>5.10.0</npmVersion.version>
+        <sonar.sources>src/app,pom.xml</sonar.sources>
+        <sonar.exclusions>node_modules/**</sonar.exclusions>
+        <sonar.ts.coverage.lcovReportPath>coverage/appli-blanche-frontend/lcov.info</sonar.ts.coverage.lcovReportPath>
+        <sonar.ts.tslint.configPath>tslint.json</sonar.ts.tslint.configPath>
+        <sonar.ts.tslint.nodePath>node/node</sonar.ts.tslint.nodePath>
+        <sonar.ts.tslint.path>node_modules/.bin/tslint</sonar.ts.tslint.path>
+        <sonar.typescript.node>node/node</sonar.typescript.node>
+        <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${sonar-maven-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M3</version><!--$NO-MVN-MAN-VER$-->
+                <!-- Configuration nécessaire pour l'utilisation des scripts SQL des TU -->
+                <configuration>
+                    <argLine>@{argLine} -Dfile.encoding=UTF-8</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>${frontend-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+                    <execution>
+                      <id>ng test</id>
+                      <goals>
+                          <goal>npm</goal>
+                      </goals>
+                      <phase>test</phase>
+                      <configuration>
+                          <arguments>run-script test-tu</arguments>
+                      </configuration>
+                  </execution>
+                </executions>
+                <configuration>
+                    <workingDirectory>${pom.parent.basedir}</workingDirectory>
+                    <!-- LTS versions -->
+                    <nodeVersion>${nodeVersion.version}</nodeVersion>
+                    <npmVersion>${npmVersion.version}</npmVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>${frontend-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>ng build</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <phase>compile</phase>
+                                <configuration>
+                                    <arguments>run-script build</arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <workingDirectory>${pom.parent.basedir}</workingDirectory>
+                            <!-- LTS versions -->
+                            <nodeVersion>${nodeVersion.version}</nodeVersion>
+                            <npmVersion>${npmVersion.version}</npmVersion>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>${maven-clean-plugin.version}</version>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>dist</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                    <followSymlinks>false</followSymlinks>
+                                </fileset>
+                                <!--fileset>
+                                    <directory>node_modules</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                    <followSymlinks>false</followSymlinks>
+                                </fileset-->
+                            </filesets>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>${frontend-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>ng build</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <phase>package</phase>
+                                <configuration>
+                                    <arguments>run-script build-prod</arguments>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ng test</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <phase>test</phase>
+                                <configuration>
+                                    <arguments>run-script test-tu</arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <workingDirectory>./</workingDirectory>
+                            <!-- LTS versions -->
+                            <nodeVersion>${nodeVersion.version}</nodeVersion>
+                            <npmVersion>${npmVersion.version}</npmVersion>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>2.5.3</version>
+                        <executions>
+                            <execution>
+                                <configuration>
+                                    <descriptor>assembly-front.xml</descriptor>
+                                    <appendAssemblyId>false</appendAssemblyId>
+                                    <finalName>${project.artifactId}-${project.version}</finalName>
+                                </configuration>
+                                <id>create-front </id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <version>0.33.0</version>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <images>
+                                <image>
+                                    <name>docker-sirh-nat-gp-nexus3.forge.education.gouv.fr/${project.artifactId}</name>
+                                    <build>
+                                        <dockerFileDir>${project.basedir}</dockerFileDir>
+                                        <assembly>
+                                            <descriptor>${project.basedir}/assembly-front.xml</descriptor>
+                                        </assembly>
+                                        <tags>
+                                            <tag>${project.version}</tag>
+                                        </tags>
+                                    </build>
+                                </image>
+                            </images>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>default</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                    <goal>push</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

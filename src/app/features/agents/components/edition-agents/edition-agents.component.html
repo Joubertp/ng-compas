@@ -1,0 +1,188 @@
+<mat-card>
+  <mat-card-title id="editAgent" *ngIf="user.role.gestion">
+    {{ editMode ? messageIhm.modifAgent : messageIhm.creerAgent }}
+  </mat-card-title>
+
+  <mat-card-title *ngIf="user.role.consultation">
+    {{ messageIhm.consulterAgent }}
+  </mat-card-title>
+
+  <form [formGroup]="agentForm" (ngSubmit)="enregistrer()" novalidate>
+    <h3>{{ messageIhm.identite }}</h3>
+    <p>
+      <mat-form-field class="l-demi" appearance="fill">
+        <mat-label>{{ messageIhm.nom }}</mat-label>
+        <input matInput type="text" name="nom" id="nom" formControlName="nom" />
+        <mat-error *ngIf="f.nom.errors !== null && f.nom.errors.required">
+          {{ messageIhm.nom }} <strong>{{ messageIhm.obligatoire }}</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="l-demi" appearance="fill">
+        <mat-label>{{ messageIhm.prenom }}</mat-label>
+        <input matInput type="text" name="prenom" id="prenom" formControlName="prenom" />
+        <mat-error *ngIf="f.prenom.errors !== null && f.prenom.errors.required">
+          {{ messageIhm.prenom }} <strong>{{ messageIhm.obligatoire }}</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="l-demi" appearance="fill">
+        <mat-label>{{ messageIhm.numen }}</mat-label>
+        <input
+          matInput
+          type="text"
+          name="numen"
+          id="numen"
+          formControlName="numen"
+          oninput="this.value = this.value.toUpperCase()"
+          maxlength="13"
+        />
+        <mat-error *ngIf="f.numen.errors !== null && f.numen.errors.required">
+          {{ messageIhm.numen }} <strong>{{ messageIhm.obligatoire }} </strong>
+        </mat-error>
+        <mat-error *ngIf="f.numen.errors !== null && f.numen.errors.pattern"
+          >{{ messageIhm.numen }} <strong>{{ messageIhm.incorrect }}</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="l-demi" appearance="fill">
+        <mat-label>{{ messageIhm.eMail }}</mat-label>
+        <input matInput type="email" name="mail" id="mail" formControlName="mail" />
+        <mat-error *ngIf="f.mail.errors !== null && f.mail.errors.pattern"
+          >{{ messageIhm.eMail }} <strong>{{ messageIhm.incorrect }} </strong>
+        </mat-error>
+        <mat-error *ngIf="f.mail.errors !== null && f.mail.errors.required">
+          {{ messageIhm.eMail }} <strong>{{ messageIhm.obligatoire }}</strong>
+        </mat-error>
+      </mat-form-field>
+    </p>
+
+    <h3>{{ messageIhm.affectation }}</h3>
+    <p class="input-group">
+      <mat-form-field class="l-demi" appearance="fill">
+        <mat-label>{{ messageIhm.departement }}</mat-label>
+        <input type="text" matInput formControlName="departement" [matAutocomplete]="auto" />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #auto="matAutocomplete"
+          [displayWith]="displayFn"
+          (optionSelected)="chercherEtablissement()"
+        >
+          <mat-option *ngFor="let dept of filteredDepartement | async" [value]="dept">
+            {{ dept.libelleImpression }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="f.departement.errors">
+          {{ messageIhm.departement }} <strong>{{ messageIhm.invalide }}</strong>
+        </mat-error>
+      </mat-form-field>
+      <!--{{ f.departement.value?.libelleImpression }}-->
+
+      <mat-form-field class="l-demi" appearance="fill">
+        <mat-label *ngIf="f.etablissement.enabled">{{ messageIhm.etablissement }}</mat-label>
+        <mat-label *ngIf="f.etablissement.disabled && !loadEtablissements"
+          >{{ messageIhm.selectDepartement }}
+        </mat-label>
+        <mat-label *ngIf="f.etablissement.disabled && loadEtablissements"
+          >{{ messageIhm.chargement }}
+        </mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="etablissement"
+          [matAutocomplete]="etabFilter"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #etabFilter="matAutocomplete"
+          [displayWith]="displayFn"
+        >
+          <mat-option *ngFor="let etab of filteredEtablissements | async" [value]="etab">
+            {{ etab.libelleImpression }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="f.etablissement.errors">
+          {{ messageIhm.etablissement }} <strong>{{ messageIhm.invalide }}</strong>
+        </mat-error>
+      </mat-form-field>
+      <!----{{ f.etablissement.value?.libelleImpression }}--->
+    </p>
+
+    <legend>
+      <h3>{{ messageIhm.corps }}</h3>
+    </legend>
+    <p class="input-group">
+      <mat-form-field class="l-demi" appearance="fill">
+        <mat-label>{{ messageIhm.typePersonnel }}</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="typePerso"
+          [matAutocomplete]="typePersoFilter"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #typePersoFilter="matAutocomplete"
+          [displayWith]="displayFn"
+          (optionSelected)="recupererCorpsPersonnel()"
+        >
+          <mat-option *ngFor="let typePerso of filteredTypePerso | async" [value]="typePerso">
+            {{ typePerso.libelleImpression }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="f.typePerso.errors">
+          {{ messageIhm.typePersonnel }} <strong>{{ messageIhm.invalide }}</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="l-demi" appearance="fill">
+        <mat-label *ngIf="f.corps.enabled">{{ messageIhm.corps }}</mat-label>
+        <mat-label *ngIf="f.corps.disabled">{{ messageIhm.selectTypePerso }} </mat-label>
+        <input type="text" matInput formControlName="corps" [matAutocomplete]="corpsFilter" />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #corpsFilter="matAutocomplete"
+          [displayWith]="displayFn"
+        >
+          <mat-option *ngFor="let corps of filteredCorps | async" [value]="corps">
+            {{ corps.libelleImpression }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="f.corps.errors"
+          >{{ messageIhm.corps }} <strong>{{ messageIhm.invalide }}</strong>
+        </mat-error>
+      </mat-form-field>
+    </p>
+
+    <div class="action-row text-center">
+      <button
+        mat-flat-button
+        color="secondary"
+        type="button"
+        (click)="this.editMode ? this.dialogRef.close() : annuler()"
+      >
+        {{ messageIhm.btnAnnuler }}
+      </button>
+      <button
+        *ngIf="user.role.gestion && !editMode"
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="agentForm.invalid || this.agentForm.disabled"
+      >
+        {{ messageIhm.creerAgent }}
+      </button>
+
+      <button
+        *ngIf="user.role.gestion && editMode"
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="agentForm.invalid || this.agentForm.disabled"
+        [mat-dialog-close]="true"
+      >
+        {{ messageIhm.modifAgent }}
+      </button>
+    </div>
+  </form>
+</mat-card>
