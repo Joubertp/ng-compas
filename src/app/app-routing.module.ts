@@ -32,11 +32,6 @@ const routes: Routes = [
     data: { profilsAutorises: [Ressources.GESTION, Ressources.CONSULTATION], },
     canActivate: [AuthGuard],
   }, {
-    path: 'agents',
-    loadChildren: () => import('./features/agents/agents.module').then((m) => m.AgentsModule),
-    data: { profilsAutorises: [Ressources.GESTION, Ressources.CONSULTATION], },
-    canActivate: [AuthGuard],
-  }, {
     path: 'agent',
     loadChildren: () => import('./features/agent/agent.module').then((m) => m.AgentModule),
     data: { profilsAutorises: [Ressources.GESTION, Ressources.CONSULTATION], },

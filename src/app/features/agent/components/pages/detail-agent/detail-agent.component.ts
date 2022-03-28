@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AgentProfile } from '../../../../agents/models/AgentProfile';
-import { AgentContexteService } from '../../../../agents/services/agent-contexte.service';
+import { AgentProfile } from '../../../models/AgentProfile';
+import { AgentContexteService } from '../../../services/agent-contexte.service';
 
 @Component({
   selector: 'app-detail-agent',

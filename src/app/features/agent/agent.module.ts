@@ -20,6 +20,8 @@ import { UserProfileChoiceComponent } from './components/pages/user-profile-choi
 import { AccueilGestionComponent } from './components/pages/accueil-gestion/accueil-gestion.component';
 import { ListStagiairesComponent } from './components/pages/list-stagiaires/list-stagiaires.component';
 import { DetailStagiaireComponent } from './components/pages/detail-stagiaire/detail-stagiaire.component';
+import { ListeAgentsComponent } from './components/pages/liste-agents/liste-agents.component';
+import { DetailAgentComponent } from './components/pages/detail-agent/detail-agent.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { DetailStagiaireComponent } from './components/pages/detail-stagiaire/de
     UserProfileChoiceComponent,
     AccueilGestionComponent,
     ListStagiairesComponent,
-    DetailStagiaireComponent
+    DetailStagiaireComponent,
+    ListeAgentsComponent,
+    DetailAgentComponent
   ],
   providers: [MessagesIHM],
   imports: [
@@ -48,6 +52,7 @@ import { DetailStagiaireComponent } from './components/pages/detail-stagiaire/de
     ReactiveFormsModule,
     FormsModule,
     NgSelectModule,
+    SharedModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

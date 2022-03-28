@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AgentsContexteService } from '../../../../agents/services/agents-contexte.service';
-import { AgentView } from '../../../../agents/models/AgentView';
+import { AgentsContexteService } from '../../../services/agents-contexte.service';
+import { AgentView } from '../../../models/AgentView';
+
 
 @Component({
   selector: 'app-liste-agents',

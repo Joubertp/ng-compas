@@ -1,7 +1,7 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import {  MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,7 +16,6 @@ import { AuthentificationInterceptor } from './shared/interceptors/authentificat
 import { MessagesIHM } from './shared/messages-ihm.constants';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
-import { AgentsModule } from './features/agents/agents.module';
 import { AgentModule } from './features/agent/agent.module';
 import { AutoOpenMenuComponent } from './shared/components/auto-open-menu/auto-open-menu.component';
 
@@ -30,7 +29,6 @@ import { AutoOpenMenuComponent } from './shared/components/auto-open-menu/auto-o
     ReactiveFormsModule,
     AuthModule,
     CoreModule,
-    AgentsModule,
     AgentModule,
     BrowserAnimationsModule
   ],
